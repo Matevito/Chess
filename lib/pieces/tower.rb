@@ -2,6 +2,7 @@ require_relative "../board"
 require_relative "../player"
 require_relative "../game_methods"
 class Tower < Board
+    include GameMethods
     def possible_moves(player, position, board)
         # the player and board arguments are objects
         color =  player.color
@@ -14,7 +15,7 @@ class Tower < Board
         possible_moves.concat(self.get_column([0,-1], current_position, color, board))
         possible_moves.concat(self.get_column([1,0], current_position, color, board))
         possible_moves.concat(self.get_column([-1,0], current_position, color, board))
-        return possible_moves
+        return correct_path(possible_moves)
     end
     def get_column(direction, position, color, board_object)
         # direction is an array in the for of [x,y]

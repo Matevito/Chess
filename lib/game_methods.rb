@@ -24,4 +24,12 @@ module GameMethods
         end
         return [row, column]
     end
+    def correct_path(path)
+        new_path = []
+        (path.size/2).times do
+            new_path << [path[0], path[1]]
+            path.shift(2)
+        end
+        return new_path
+    end
 end
