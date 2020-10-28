@@ -13,9 +13,27 @@ class Player
         elsif current_move == "O-O" || current_move == "O-O-O"
             return current_move
         end
-        # move format [current_piece, where_to_move]
+        # move format [current_piece, current_cell, where_to_move]
         move = current_move.split("-")
-        # todo: color format of move[0]
-        return move
+        # modifify the current cell and current piece format
+        move_format = []
+        if move[0].length == 3
+            if self.color == "black"
+                move_format << move[0][0].downcase
+                move_format << move[0][0,2]
+            else
+                move_format << move[0][0].uppercase
+                move_format << move[0][0,2] 
+            end
+        else
+            if self.color == "black"
+                move_format << "p"
+                move_format << move[0][0,2]
+            else
+                move_format << "P"
+                move_format << move[0][0,2]
+            end 
+        end
+        return move_format << move[1]
     end
 end
