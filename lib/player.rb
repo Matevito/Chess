@@ -5,7 +5,6 @@ class Player
         @color = color
     end
     def make_move()
-        puts"\n#{@name}, insert a move:"
         current_move = gets.chomp
         # castle exception
         if current_move == "o-o" || current_move == "o-o-o"
