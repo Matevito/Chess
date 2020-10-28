@@ -1,5 +1,5 @@
 class Board
-    attr_reader :board
+    attr_accessor :board
     def initialize
         @board = [  ["T","N","B","Q","K","B","N","T"],
                     ["P","P","P","P","P","P","P","P"],
