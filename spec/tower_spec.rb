@@ -43,8 +43,18 @@ describe Tower do
             c_cell = [4,3]
             expect(tower.possible_moves(white_player, c_cell, board)).to eql([[4,2],[4,1],[4,0],[5,3],[6,3],[7,3],[3,3],[2,3],[1,3]])
         end
-        xit "handles a board with pieces(black)" do
-            
+        it "handles a board with pieces(black)" do
+            board = Board.new
+            board.board = [  [" "," "," "," "," "," "," "," "],
+                            [" "," "," ","p"," "," "," "," "],
+                            [" ","p"," "," ","t"," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," ","","Q"," "," "," "],
+                            [" "," "," "," ","B"," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [""," "," ","q"," "," "," "," "]]
+            c_cell = [2,4]
+            expect(tower.possible_moves(black_player, c_cell, board)).to eql([[2,5],[2,6],[2,7],[2,3],[2,2],[3,4],[4,4],[1,4],[0,4]])
         end
     end
 end
