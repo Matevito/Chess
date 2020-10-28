@@ -20,13 +20,28 @@ describe Tower do
             c_cell = [4,4]
             expect(tower.possible_moves(white_player, c_cell, board)).to eql([[4,5],[4,6],[4,7],[4,3],[4,2],[4,1],[4,0],[5,4],[6,4],[7,4],[3,4],[2,4],[1,4],[0,4]])
         end
-        xit "dont have possible moves in the beggining(white)" do
-            
+        it "dont have possible moves in the beggining(white)" do
+            board = Board.new
+            c_cell = [0,0]
+            expect(tower.possible_moves(white_player, c_cell, board)).to eql([])
         end
-        xit "dont have possible moves in the beggining(black)" do
+        it "dont have possible moves in the beggining(black)" do
+            board = Board.new
+            c_cell = [7,7]
+            expect(tower.possible_moves(black_player, c_cell, board)).to eql([])
         end
-        xit "handles a board with pieces(white)" do
-            
+        it "handles a board with pieces(white)" do
+            board = Board.new
+            board.board = [  [" "," "," "," "," "," "," "," "],
+                            [" "," "," ","p"," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," ","T","K"," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [""," "," ","q"," "," "," "," "]]
+            c_cell = [4,3]
+            expect(tower.possible_moves(white_player, c_cell, board)).to eql([[4,2],[4,1],[4,0],[5,3],[6,3],[7,3],[3,3],[2,3],[1,3]])
         end
         xit "handles a board with pieces(black)" do
             

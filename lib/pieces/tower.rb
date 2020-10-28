@@ -18,7 +18,7 @@ class Tower < Board
         return correct_path(possible_moves)
     end
     def get_column(direction, position, color, board_object)
-        # direction is an array in the for of [x,y]
+        # direction is an array in the for of [x,y]; x row, y column
         possible_moves = []
         current_position = position.dup.map(&:dup)
         board = board_object.board
@@ -26,7 +26,8 @@ class Tower < Board
             current_position[0] += direction[0]
             current_position[1] += direction[1]
             break unless move_in_board?(current_position)
-            row = current_position[0]; column = current_position[1]
+            row = current_position[0]
+            column = current_position[1]
             if board[row][column] == " "
                 possible_moves.concat(current_position)
             else
@@ -34,14 +35,13 @@ class Tower < Board
                 if color == "white"
                     if board_cell == board_cell.downcase
                         possible_moves.concat(current_position)
-                        break
                     end
                 elsif color == "black"
                     if board_cell == board_cell.upcase
                         possible_moves.concat(current_position)
-                        break
                     end
                 end
+                return possible_moves
             end
         end
         return possible_moves
