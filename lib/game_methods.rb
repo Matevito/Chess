@@ -22,7 +22,7 @@ module GameMethods
         when "h"
             column = 7
         end
-        return [row, column]
+        return [row-1, column]
     end
     def correct_path(path)
         new_path = []
