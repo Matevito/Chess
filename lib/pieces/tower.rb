@@ -13,6 +13,7 @@ Class Tower < Board
         possible_moves << self.get_column([1,0], current_position, color, board)
         possible_moves << self.get_column([-1,0], current_position, color, board)
 
+        return possible_moves
     end
     def get_column(direction, position, color, board)
         # direction is an array in the for of [x,y]
