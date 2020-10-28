@@ -1,5 +1,6 @@
 require_relative "../board"
 require_relative "../player"
+require_relative "../game_methods"
 class Tower < Board
     def possible_moves(player, position, board)
         # the player and board arguments are objects
