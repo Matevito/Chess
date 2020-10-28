@@ -20,10 +20,10 @@ class Player
         if move[0].length == 3
             if self.color == "black"
                 move_format << move[0][0].downcase
-                move_format << move[0][0,2]
+                move_format << move[0][1,2]
             else
-                move_format << move[0][0].uppercase
-                move_format << move[0][0,2] 
+                move_format << move[0][0].upcase
+                move_format << move[0][1,2] 
             end
         else
             if self.color == "black"
@@ -34,6 +34,7 @@ class Player
                 move_format << move[0][0,2]
             end 
         end
+
         return move_format << move[1]
     end
 end
