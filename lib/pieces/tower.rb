@@ -4,7 +4,7 @@ Class Tower
         color =  player.color
         possible_moves = []
         current_board = board.board
-        # 
+        # north column
         current_position = position
         until current_position[1] > 7
             current_position[1] += 1
@@ -13,11 +13,21 @@ Class Tower
             if current_board[row][column] == " "
                 possible_moves << current_position
             else
+                board_cell = current_board[row][column]
                 if color == "white"
-                    
+                    if board_cell == board_cell.downcase
+                        possible_moves << current_position
+                        break
+                    end
                 elsif color == "black"
+                    if board_cell == board_cell.upcase
+                        possible_moves << current_position
+                        break
+                    end
+                end
             end
         end
+
 
     end
 end
