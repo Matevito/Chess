@@ -44,19 +44,6 @@ class Tower < Board
                 end
             end
         end
-        p"possible moves for the moment #{possible_moves}"
         return possible_moves
     end
 end
-board = Board.new
-white_player = Player.new("1","white")
-board.board = [  [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," ","T"," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "]]
-tower = Tower.new
-p tower.possible_moves(white_player, [4,4], board)
