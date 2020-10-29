@@ -63,7 +63,13 @@ class Pawn < Board
     
     end
     def can_promote?(player, position)
-
+        color = player.color
+        if color == "white"
+            return true if position[0] == 7
+        else
+            return true if position[0] == 0
+        end
+        return false
     end
     def promote
 
