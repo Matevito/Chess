@@ -28,7 +28,7 @@ class King < Board
         elsif color == "black"
             for y in (0..7) do
                 for x in (0..7)do
-                    c_cell = current_board[y][x]
+                    c_cell = [y,x]
                     return true if check_path(c_cell, current_board, "white").include?(king_position)
                 end
             end
