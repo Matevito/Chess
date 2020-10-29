@@ -32,8 +32,31 @@ class Pawn < Board
         end
         return valid_moves
     end
-    def capture_range()
+    def capture_range(player, position, board)
+        color = player.color
+        current_board = board.board
+        possible_candidates = []
 
+        if color == "white"
+            possible_candidates << [position[0]+1, position[1]+1]
+            possible_candidates << [position[0]+1, position[1]-1]
+        else
+            possible_candidates << [position[0]-1, position[1]+1]
+            possible_candidates << [position[0]-1, position[1]-1]
+        end
+
+        possible_captures = []
+        possible_candidates.each do |cell|
+            next unless move_in_board?(cell)
+            row = cell[0]; column = cell[1]
+            board_cell = current_board[row][column]
+            if color = "white" && board_cell = board_cell.downcase
+                possible_captures.concat([cell])
+            elsif color = "black" && board_cell = board_cell.upcase
+                possible_captures.concat([cell])
+            end
+        end
+        return possible_captures
     end
     def en_passant()
     
