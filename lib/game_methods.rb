@@ -32,43 +32,4 @@ module GameMethods
         end
         return new_path
     end
-    def check_path(position, board, color)
-        cell_content  = board[position[0]][position[1]]
-        # check if the current cell has a piece of the player color
-        unless position == position.upcase && color == "white"
-            return []
-        end
-        unless position == position.downcase && color == "black"
-            return []
-        end
-
-        # check the path of the piece
-        if color == "white"
-            player = Player.new("0", "white")
-        else
-            player = Player.new("1", "black")
-        end
-
-        case cell_content
-        when "T"||"t"
-            piece = Tower.new
-        when "N"||"n"
-            piece = Knight.new
-        when "B"||"b"
-            piece = Bishop.new
-        when "Q"||"q"
-            piece = Queen.new
-        when "K"||"k"
-            piece = King.new
-        when "P"||"p"
-            piece = Pawn.new
-        end
-
-        if cell_content == "P" || cell_content == "p"
-            return piece.capture_range(player, position, board)
-        else
-            return piece.possible_moves(player, position, board)
-        end
-
-    end
 end
