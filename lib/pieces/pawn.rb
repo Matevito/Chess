@@ -50,6 +50,7 @@ class Pawn < Board
             next unless move_in_board?(cell)
             row = cell[0]; column = cell[1]
             board_cell = current_board[row][column]
+            next if board_cell == " "
             if color = "white" && board_cell = board_cell.downcase
                 possible_captures.concat([cell])
             elsif color = "black" && board_cell = board_cell.upcase
