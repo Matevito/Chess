@@ -16,18 +16,18 @@ class King < Board
         color = player.color
         current_board = board.board
         king_position = get_king(color, current_board)
-        
+
         # if the path of an enemy piece has the current cell of the king, is a check
         if color == "white"
-            for y in range(0..7) do
-                for x in range(0..7)do
+            for y in (0..7) do
+                for x in (0..7)do
                     c_cell = current_board[y][x]
                     return true if check_path(c_cell, current_board,"black").include?(king_position)
                 end
             end
         elsif color == "black"
-            for y in range(0..7) do
-                for x in range(0..7)do
+            for y in (0..7) do
+                for x in (0..7)do
                     c_cell = current_board[y][x]
                     return true if check_path(c_cell, current_board, "white").include?(king_position)
                 end
@@ -37,15 +37,15 @@ class King < Board
     end
     def get_king(color)
         if color == "white"
-            for y in range(0..7) do
-                for x in range(0..7)do
+            for y in (0..7) do
+                for x in (0..7)do
                     c_cell = board[y][x]
                     return [y,x] if c_cell == "K"
                 end
             end
         elsif color == "black"
-            for y in range(0..7) do
-                for x in range(0..7)do
+            for y in (0..7) do
+                for x in (0..7)do
                     c_cell = board[y][x]
                     return [y,x] if c_cell == "k"
                 end
