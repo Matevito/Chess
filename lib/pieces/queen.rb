@@ -1,7 +1,7 @@
 require_relative "../board"
 require_relative "../player"
 require_relative "../game_methods"
-class Queen < board
+class Queen < Board
     include GameMethods
     def possible_moves(player, position, board)
         # the player and board arguments are objects
@@ -20,6 +20,7 @@ class Queen < board
         possible_moves.concat(self.get_line([0,-1], current_position, color, board))
         possible_moves.concat(self.get_line([-1,-1], current_position, color, board))
 
+        return correct_path(possible_moves)
     end
     def get_line(direction, position, color, board_object)
         # direction is an array in the for of [x,y]; x row, y column
@@ -50,3 +51,4 @@ class Queen < board
         end
         return possible_moves
     end
+end
