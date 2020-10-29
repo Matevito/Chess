@@ -2,28 +2,29 @@ require_relative "../board"
 require_relative "../player"
 require_relative "../game_methods"
 
-class Pawn < board
-    include game_methods
+class Pawn < Board
+    include GameMethods
     def possible_moves(player, position, board)
         color = player.color
         current_board = board.board
         possible_moves = []
 
         if color == "white"
-            possible_moves.concat([position[0]-1, position[1]])
-            if position[1] == 1
-                possible_moves.concat([position[0]-2, position[1]])
-            end
-        elsif color == "black"
             possible_moves.concat([position[0]+1, position[1]])
-            if position[1] == 6
+            if position[0] == 1
                 possible_moves.concat([position[0]+2, position[1]])
             end
+        elsif color == "black"
+            possible_moves.concat([position[0]-1, position[1]])
+            if position[0] == 6
+                possible_moves.concat([position[0]-2, position[1]])
+            end
         end
-
+        possible_moves = correct_path(possible_moves)
         valid_moves = []
         possible_moves.each do |cell|
-            row = current_board[0]; column = current_board[1]
+            next unless move_in_board?(cell)
+            row = cell[0]; column = cell[1]
             board_cell = current_board[row][column]
             if board_cell == " "
                 valid_moves.concat([cell])
@@ -43,3 +44,4 @@ class Pawn < board
     def promote
 
     end
+end
