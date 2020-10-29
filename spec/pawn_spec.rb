@@ -73,4 +73,42 @@ describe Pawn do
 
         end
     end
+    describe "#can_promote?" do
+        it "can't promote in beggining position (white)" do
+            board = Board.new
+            c_cell = [1,1]
+            expect(pawn.can_promote?(white_player, c_cell)).to eql(false)
+        end
+        it "can't promote in beggining position (black)" do
+            board = Board.new
+            c_cell = [6,4]
+            expect(pawn.can_promote?(black_player, c_cell)).to eql(false)
+        end
+        it "can promote (white)" do
+            board = Board.new
+            board.board = [ [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            ["P","K"," "," "," "," "," "," "],
+                            [" ","p"," "," "," "," "," "," "],
+                            ["Q"," ","P"," "," "," "," "," "],
+                            [" ","p"," "," "," "," "," "," "],
+                            [" "," "," "," "," ","k"," ","P"]]
+            c_cell = [7,7]
+            expect(pawn.can_promote?(white_player, c_cell)).to eql(true)
+        end
+        it "can promote (black)" do
+            board = Board.new
+            board.board = [ [" "," "," "," ","p"," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            ["P","K"," "," "," "," "," "," "],
+                            [" ","p"," "," "," "," "," "," "],
+                            ["Q"," ","P"," "," "," "," "," "],
+                            [" ","p"," "," "," "," "," "," "],
+                            [" "," "," "," "," ","k"," "," "]]
+            c_cell = [0,4]
+            expect(pawn.can_promote?(black_player, c_cell)).to eql(true)
+        end
+    end
 end
