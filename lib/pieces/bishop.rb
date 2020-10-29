@@ -2,6 +2,7 @@ require_relative "../board"
 require_relative "../player"
 require_relative "../game_methods"
 class Bishop < Board
+    include GameMethods
     def possible_moves(player, position, board)
         color =  player.color
         possible_moves = []
@@ -9,11 +10,11 @@ class Bishop < Board
         current_position = position
 
         #diagonals from the right
-        possible_moves.concat(self.get_diagonal([1,1], current_position, color, board))
         possible_moves.concat(self.get_diagonal([-1,1], current_position, color, board))
+        possible_moves.concat(self.get_diagonal([1,1], current_position, color, board))
         #diagonals from the left
-        possible_moves.concat(self.get_diagonal([-1,-1], current_position, color, board))
         possible_moves.concat(self.get_diagonal([1,-1], current_position, color, board))
+        possible_moves.concat(self.get_diagonal([-1,-1], current_position, color, board))
 
         return correct_path(possible_moves)
     end
