@@ -53,8 +53,18 @@ describe Knight do
             c_cell = [2,5]
             expect(knight.possible_moves(white_player, c_cell, board)).to eql([[3,7],[4,6],[4,4],[1,3],[0,4]])
         end
-        xit "no possible moves for knight" do
-            board = Board.new    
+        it "no possible moves for knight" do
+            board = Board.new 
+            board.board = [     [" "," "," "," "," "," "," "," "],
+                                [" "," "," "," "," "," "," "," "],
+                                [" "," "," "," "," "," "," "," "],
+                                [" "," "," "," "," "," "," "," "],
+                                [" "," "," "," "," "," "," "," "],
+                                [" "," "," "," "," ","p"," ","b"],
+                                [" "," "," "," ","p"," "," "," "],
+                                [" "," "," "," "," "," ","n"," "]]
+            c_cell = [7,6]
+            expect(knight.possible_moves(black_player, c_cell, board)).to eql([])
         end
     end
 end
