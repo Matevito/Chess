@@ -12,6 +12,32 @@ describe Pawn do
             c_cell = [1,3]
             expect(pawn.possible_moves(white_player, c_cell, board)).to eql([[2,3],[3,3]])
         end
+        it "pieces in path (black)" do
+        board = Board.new
+        board.board =     [ [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" ","K"," "," "," "," "," "," "],
+                            [" ","p"," "," "," "," "," "," "],
+                            [" ","k","P"," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "]]
+            c_cell = [4,1]
+            expect(pawn.possible_moves(black_player, c_cell, board)).to eql([])
+        end
+        it "blocked path in the beggining position" do
+            board = Board.new
+            board.board = board.board =     [ [" "," "," "," "," "," "," "," "],
+                                            [" "," "," "," "," "," "," "," "],
+                                            [" "," "," "," "," "," "," "," "],
+                                            [" "," "," "," "," "," "," "," "],
+                                            [" "," "," "," ","N"," "," "," "],
+                                            [" "," "," "," "," "," "," "," "],
+                                            [" "," "," "," ","p"," "," "," "],
+                                            [" "," "," "," "," "," "," "," "]]
+            c_cell = [6,4]
+            expect(pawn.possible_moves(black_player, c_cell, board)).to eql([[5,4]])
+        end
     end
 
 end
