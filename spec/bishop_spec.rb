@@ -22,12 +22,12 @@ describe Bishop do
         end
         it "don't have possible moves in the beggining(white)" do
             board = Board.new
-            c_cell = [0,0]
+            c_cell = [0,2]
             expect(bishop.possible_moves(white_player, c_cell, board)).to eql([])
         end
         it "don't have possible moves in the beggining(black)" do
             board = Board.new
-            c_cell = [7,7]
+            c_cell = [7,6]
             expect(bishop.possible_moves(black_player, c_cell, board)).to eql([])
         end
         it "handles a board with pieces" do
