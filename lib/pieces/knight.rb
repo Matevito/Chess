@@ -18,6 +18,7 @@ class Knight < Board
         possible_moves.concat([current_position[0]-1, current_position[1]-2])
         possible_moves.concat([current_position[0]-2, current_position[1]-1])
         
+        possible_moves = correct_path(possible_moves)
         knight_valid_moves = []
         possible_moves.each do |cell|
             if move_in_board?(cell)
@@ -25,11 +26,11 @@ class Knight < Board
                 column = cell[1]
                 board_cell = current_board[row][column]
                 if board_cell == " "
-                    knight_valid_moves.concat(cell)
+                    knight_valid_moves.concat([cell])
                 elsif color == "white"
-                    knight_valid_moves.concat(cell) if board_cell == board_cell.downcase
+                    knight_valid_moves.concat([cell]) if board_cell == board_cell.downcase
                 elsif color == "black"
-                    knight_valid_moves.concat(cell) if board_cell == board_cell.upcase
+                    knight_valid_moves.concat([cell]) if board_cell == board_cell.upcase
                 end
             end
         end
