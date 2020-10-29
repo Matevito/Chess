@@ -1,6 +1,7 @@
 require_relative "../board"
 require_relative "../player"
-class Knight
+require_relative "../game_methods"
+class Knight < Board
     include GameMethods
     def possible_moves(player, position, board)
         color =  player.color
