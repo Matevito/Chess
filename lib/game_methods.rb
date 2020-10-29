@@ -1,9 +1,3 @@
-require_relative "pieces/pawn"
-require_relative "pieces/knight"
-require_relative "pieces/bishop"
-require_relative "pieces/queen"
-require_relative "pieces/tower"
-require_relative "pieces/king"
 module GameMethods
     def chess_to_num(cell)
         # cell number format [row, column]
@@ -68,6 +62,7 @@ module GameMethods
             piece = King.new
         when "P"||"p"
             piece = Pawn.new
+        end
 
         if cell_content == "P" || cell_content == "p"
             return piece.capture_range(player, position, board)
