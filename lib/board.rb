@@ -15,4 +15,13 @@ class Board
         return false if position[0] > 7 || position[1] > 7
         return true
     end
+    def stalemate?(player)
+        color = player.color
+        possible_moves = []
+        for y in (0..7) do
+            for x (0..7) do
+                c_cell = [y,x]
+            end
+        end
+    end
 end
