@@ -1,3 +1,9 @@
+require_relative "pieces/bishop"
+require_relative "pieces/king"
+require_relative "pieces/knight"
+require_relative "pieces/pawn"
+require_relative "pieces/queen"
+require_relative "pieces/tower"
 class Board
     attr_accessor :board
     def initialize
@@ -20,8 +26,67 @@ class Board
         possible_moves = []
         for y in (0..7) do
             for x (0..7) do
-                c_cell = [y,x]
+                if color == "white"
+                    piece_path = self.piece_path([y,x], "black")
+                else 
+                    piece_path = self.piece_path([y,x], "white")
+                end
             end
+        end
+        if possible_moves == []
+            return true
+        else
+            return false
+        end
+    end
+    def piece_path(position, color)
+        current_board = board.board
+        cell_content = current_board[position[0]][position[1]]
+        
+        if cell_content == cell_content.upcase && color == "black"
+            return []
+        end
+        if cell_content == cell_content.downcase && color == "white"
+            return []
+        end
+
+        if color == "white"
+            player = Player.new("0", "white")
+        else
+            player = Player.new("1", "black")
+        end
+
+        case cell_content
+        when "T"
+            piece = Tower.new
+        when "t"
+            piece = Tower.new
+        when "N"
+            piece = Knight.new
+        when "n"
+            piece = Knight.new
+        when "B"
+            piece = Bishop.new
+        when "b"
+            piece = Bishop.new
+        when "Q"
+            piece = Queen.new
+        when "q"
+            piece = Queen.new
+        when "K"
+            piece = King.new
+        when "k"
+            piece = King.new
+        when "P"
+            piece = Pawn.new
+        when "p"
+            piece = Pawn.new
+        end
+
+        if cell_content == "P" || cell_content == "p"
+            return piece.capture_range(player, position, board)
+        else
+            return piece.possible_moves(player, position, board)
         end
     end
 end
