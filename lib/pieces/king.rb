@@ -35,7 +35,7 @@ class King < Board
         end
         return false
     end
-    def get_king(color)
+    def get_king(color, board)
         if color == "white"
             for y in (0..7) do
                 for x in (0..7)do
@@ -55,10 +55,10 @@ class King < Board
     def check_path(position, board, color)
         cell_content  = board[position[0]][position[1]]
         # check if the current cell has a piece of the player color
-        unless position == position.upcase && color == "white"
+        unless cell_content == cell_content.upcase && color == "white"
             return []
         end
-        unless position == position.downcase && color == "black"
+        unless cell_content == cell_content.downcase && color == "black"
             return []
         end
 
