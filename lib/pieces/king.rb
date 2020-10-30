@@ -156,17 +156,3 @@ class King < Board
         end
     end
 end
-
-king = King.new
-board = Board.new
-player = Player.new("1","black")
-board.board =  [[" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," ","k"," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "]]
-c_cell = [5,2]
-p king.possible_moves(player, c_cell, board)
