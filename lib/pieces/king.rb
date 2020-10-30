@@ -28,7 +28,7 @@ class King < Board
         possible_moves.each do |cell|
             row = cell[0]; column = cell[1]
             next unless move_in_board?(cell)
-            next unless current_board[row][column] = " "
+            next unless current_board[row][column] == " "
             
             # make a copy of the board with the king in the new possible cell
             test_board = Board.new
@@ -38,7 +38,7 @@ class King < Board
             king_row = position[0]
             king_column = position[1]
             current_test_board = test_board.board
-            current_test_board[row][cell] = current_test_board[king_row][king_column]
+            current_test_board[row][column] = current_board[king_row][king_column]
             current_test_board[king_row][king_column] = " "
             # check the new board for possible checks!
             unless self.check?(player, test_board)
@@ -128,9 +128,25 @@ class King < Board
         end
         if cell_content == "P" || cell_content == "p"
             return piece.capture_range(player, position, board)
+        elsif cell_content == "K" || cell_content == "k"
+            #king method
+            return []
         else
             return piece.possible_moves(player, position, board)
         end
-
     end
 end
+
+king = King.new
+board = Board.new
+player = Player.new("1","black")
+board.board =  [[" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," ","k"," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "]]
+c_cell = [5,2]
+p king.possible_moves(player, c_cell, board)
