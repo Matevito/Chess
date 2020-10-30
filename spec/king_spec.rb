@@ -82,9 +82,6 @@ describe King do
             c_cell = [6,1]
             expect(king.check_path(c_cell, board, "black")).to eql([[5,2],[5,0]])
         end
-        xit "get path of black king" do
-            #todo when king method is done
-        end
     end
     describe "#check?" do
         board = Board.new
@@ -143,17 +140,54 @@ describe King do
         it "no moves in beggining position" do
             expect(king.possible_moves(white_player,[0,4], board)).to eql([])
         end
-        xit "moves in a clean board" do
-
+        it "moves in a clean board" do
+            board.board =  [[" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," ","k"," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "]]
+            c_cell = [5,2]
+            expect(king.possible_moves(black_player, c_cell, board)).to eql([[4,2],[4,3],[5,3],
+                                                    [6,3],[6,2],[6,1],[5,1],[4,1]])
         end
-        xit "moves with blocked path of allies and board" do
-
+        it "moves with blocked path of allies and board" do
+            board.board =  [[" "," "," "," "," "," ","Q"," "],
+                            [" "," "," "," "," "," "," ","K"],
+                            [" "," "," "," "," "," ","N"," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            ["b"," "," "," "," "," "," "," "],
+                            ["t","k"," "," "," "," "," "," "]]
+            c_cell = [1,7]
+            expect(king.possible_moves(white_player, c_cell, board)).to eql([[0,7],[2,7],[1,6]])
         end
-        xit "moves with blocked path with allies and possible checks" do
-            
+        it "moves with blocked path with allies and possible checks" do
+            board.board =  [[" "," "," "," "," "," ","Q"," "],
+                            [" "," "," "," "," "," "," ","K"],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            ["t"," "," "," "," "," "," "," "],
+                            ["b","k"," "," "," "," "," "," "]]
+            c_cell = [1,7]
+            expect(king.possible_moves(white_player, c_cell, board)).to eql([[2,7],[2,6]])
         end
-        xit "blocked path in front of an enemy king" do
-            
+        it "blocked path in front of an enemy king" do
+            board.board =  [["k"," ","K"," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "]]
+            c_cell = [0,0]
+            expect(king.possible_moves(black_player, c_cell, board)).to eql([[1,0]])
         end
     end
 end
