@@ -53,12 +53,13 @@ class King < Board
         end
     end
     def check_path(position, board, color)
-        cell_content  = board[position[0]][position[1]]
+        current_board = board.board
+        cell_content  = current_board[position[0]][position[1]]
         # check if the current cell has a piece of the player color
-        unless cell_content == cell_content.upcase && color == "white"
+        if cell_content == cell_content.upcase && color == "black"
             return []
         end
-        unless cell_content == cell_content.downcase && color == "black"
+        if cell_content == cell_content.downcase && color == "white"
             return []
         end
 
@@ -68,22 +69,32 @@ class King < Board
         else
             player = Player.new("1", "black")
         end
-
         case cell_content
-        when "T"||"t"
+        when "T"
             piece = Tower.new
-        when "N"||"n"
+        when "t"
+            piece = Tower.new
+        when "N"
             piece = Knight.new
-        when "B"||"b"
+        when "n"
+            piece = Knight.new
+        when "B"
             piece = Bishop.new
-        when "Q"||"q"
+        when "b"
+            piece = Bishop.new
+        when "Q"
             piece = Queen.new
-        when "K"||"k"
+        when "q"
+            piece = Queen.new
+        when "K"
             piece = King.new
-        when "P"||"p"
+        when "k"
+            piece = King.new
+        when "P"
+            piece = Pawn.new
+        when "p"
             piece = Pawn.new
         end
-
         if cell_content == "P" || cell_content == "p"
             return piece.capture_range(player, position, board)
         else
@@ -92,3 +103,6 @@ class King < Board
 
     end
 end
+#board = Board.new
+#king = King.new
+#p king.check_path([7,1], board, "black")
