@@ -14,22 +14,18 @@ class King < Board
     end
     def check?(player, board)
         color = player.color
-        current_board = board.board
-        king_position = get_king(color, current_board)
-
+        king_position = self.get_king(color, board.board)
         # if the path of an enemy piece has the current cell of the king, is a check
         if color == "white"
             for y in (0..7) do
                 for x in (0..7)do
-                    c_cell = current_board[y][x]
-                    return true if check_path(c_cell, current_board,"black").include?(king_position)
+                    return true if self.check_path([y,x], board,"black").include?(king_position)
                 end
             end
         elsif color == "black"
             for y in (0..7) do
                 for x in (0..7)do
-                    c_cell = [y,x]
-                    return true if check_path(c_cell, current_board, "white").include?(king_position)
+                    return true if self.check_path([y,x], board, "white").include?(king_position)
                 end
             end
         end
@@ -103,6 +99,3 @@ class King < Board
 
     end
 end
-#board = Board.new
-#king = King.new
-#p king.check_path([7,1], board, "black")

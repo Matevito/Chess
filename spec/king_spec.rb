@@ -87,17 +87,52 @@ describe King do
         end
     end
     describe "#check?" do
-        xit "no check in starting possition" do
-
+        board = Board.new
+        white_player = Player.new("1","white")
+        black_player = Player.new("2", "black")
+        it "no check in starting possition" do
+            board.board =[["T","N","B","Q"," ","B","N","T"],
+                        ["P","P","P","P","P","P","P","P"],
+                        [" "," "," "," "," "," "," "," "],
+                        [" "," "," "," "," "," "," "," "],
+                        [" "," "," "," "," "," "," "," "],
+                        [" "," "," "," "," "," "," "," "],
+                        ["p","p","p","p","p","p","p","p"],
+                        ["t","n","b","q","k","b","n","t"]]
+            expect(king.check?(black_player,board)).to eql(false)
         end
-        xit "pawn protecting from a check" do
-
+        it "pawn protecting from a check" do
+            board.board = [ [" "," "," ","K"," "," "," "," "],
+                            [" "," ","P"," "," "," "," "," "],
+                            [" ","b"," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," ","p"," "," "],
+                            [" "," "," "," ","p"," "," "," "],
+                            [" "," "," "," "," "," ","n"," "]]
+            expect(king.check?(white_player, board)).to eql(false)
         end
-        xit "check(white king)"do
-        
+        it "check(white king)"do
+            board.board = [[" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," ","n"," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," ","K"," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "]]
+            expect(king.check?(white_player, board)).to eql(true)
         end
-        xit "check(black king)"do
-
+        it "check(black king)"do
+            board.board = [[" "," "," "," "," "," "," "," "],
+                        [" "," "," "," "," "," "," "," "],
+                        [" "," ","Q"," "," "," "," "," "],
+                        [" "," "," "," "," "," "," "," "],
+                        [" "," "," "," "," "," "," "," "],
+                        [" "," ","k"," "," "," "," "," "],
+                        [" "," "," "," "," "," "," "," "],
+                        [" "," "," "," "," "," "," "," "]]
+            expect(king.check?(black_player, board)).to eql(true)
         end
     end
     describe "#possible_moves" do
