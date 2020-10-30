@@ -12,7 +12,6 @@ class King < Board
     def possible_moves(player, position, board)
         color =  player.color
         current_board = board.board
-        current_position = position
         possible_moves = []
 
         possible_moves.concat([position[0]-1,position[1]])
@@ -35,8 +34,12 @@ class King < Board
             test_board = Board.new
             board_copy = current_board.dup.map(&:dup)
             test_board.board = board_copy
-            test_board.board[row][cell] = test_board.board[position[0]][position[1]]
-            test_board.board[position[0]][position[1]] = " "
+            # king in new position
+            king_row = position[0]
+            king_column = position[1]
+            current_test_board = test_board.board
+            current_test_board[row][cell] = current_test_board[king_row][king_column]
+            current_test_board[king_row][king_column] = " "
             # check the new board for possible checks!
             unless self.check?(player, test_board)
                 valid_moves << cell

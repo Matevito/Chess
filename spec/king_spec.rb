@@ -136,8 +136,12 @@ describe King do
         end
     end
     describe "#possible_moves" do
-        xit "no moves in beggining position" do
-
+        board = Board.new
+        king = King.new
+        white_player = Player.new("1","white")
+        black_player = Player.new("2", "black")
+        it "no moves in beggining position" do
+            expect(king.possible_moves(white_player,[0,4], board)).to eql([])
         end
         xit "moves in a clean board" do
 
