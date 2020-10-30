@@ -83,6 +83,27 @@ class King < Board
             end
         end
     end
+    def king_sorroundings(player, position, board)
+        color =  player.color
+        current_board = board.board
+        possible_moves = []
+
+        possible_moves.concat([position[0]-1,position[1]])
+        possible_moves.concat([position[0]-1,position[1]+1])
+        possible_moves.concat([position[0],position[1]+1])
+        possible_moves.concat([position[0]+1,position[1]+1])
+        possible_moves.concat([position[0]+1,position[1]])
+        possible_moves.concat([position[0]+1,position[1]-1])
+        possible_moves.concat([position[0],position[1]-1])
+        possible_moves.concat([position[0]-1,position[1]-1])
+        possible_moves = correct_path(possible_moves)
+        
+        valid_moves = []
+        possible_moves.each do |cell|
+            valid_moves << cell if move_in_board?(cell)
+        end
+        return valid_moves
+    end
     def check_path(position, board, color)
         current_board = board.board
         cell_content  = current_board[position[0]][position[1]]
@@ -129,8 +150,7 @@ class King < Board
         if cell_content == "P" || cell_content == "p"
             return piece.capture_range(player, position, board)
         elsif cell_content == "K" || cell_content == "k"
-            #king method
-            return []
+            return piece.king_sorroundings(player, position, board)
         else
             return piece.possible_moves(player, position, board)
         end
