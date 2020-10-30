@@ -10,7 +10,27 @@ require_relative "tower"
 class King < Board
     include GameMethods
     def possible_moves(player, position, board)
+        color =  player.color
+        current_board = board.board
+        current_position = position
+        possible_moves = []
 
+        possible_moves.concat([position[0]-1,position[1]])
+        possible_moves.concat([position[0]-1,position[1]+1])
+        possible_moves.concat([position[0],position[1]+1])
+        possible_moves.concat([position[0]+1,position[1]+1])
+        possible_moves.concat([position[0]+1,position[1]])
+        possible_moves.concat([position[0]+1,position[1]-1])
+        possible_moves.concat([position[0],position[1]-1])
+        possible_moves.concat([position[0]-1,position[1]-1])
+        possible_moves = correct_path(possible_moves)
+        
+        valid_moves = []
+        possible_moves.each do |cell|
+            next if move_in_board?(cell)
+                
+        end
+        return valid_moves
     end
     def check?(player, board)
         color = player.color
