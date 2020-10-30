@@ -27,8 +27,20 @@ class King < Board
         
         valid_moves = []
         possible_moves.each do |cell|
-            next if move_in_board?(cell)
-                
+            row = cell[0]; column = cell[1]
+            next unless move_in_board?(cell)
+            next unless current_board[row][column] = " "
+            
+            # make a copy of the board with the king in the new possible cell
+            test_board = Board.new
+            board_copy = current_board.dup.map(&:dup)
+            test_board.board = board_copy
+            test_board.board[row][cell] = test_board.board[position[0]][position[1]]
+            test_board.board[position[0]][position[1]] = " "
+            # check the new board for possible checks!
+            unless self.check?(player, test_board)
+                valid_moves << cell
+            end
         end
         return valid_moves
     end
