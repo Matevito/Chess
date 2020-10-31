@@ -8,7 +8,13 @@ require_relative "pieces/tower"
 class ChessGame
     include GameMethods
     def checkmate?(player, board)
-
+        king = King.new
+        if king.check?(player,board)
+            if self.stalemate?(player,board)
+                return true
+            end
+        end
+        return false
     end
     def stalemate?(player,board)
         color = player.color
@@ -93,23 +99,8 @@ class ChessGame
         end
 
         path = piece.possible_moves(player, position, board)
-        p "path #{path}"
         path = correct_path(path)
-        p "path #{path}"
         path = search_checks(path, position, player, board)
         return path
     end
 end
-board = Board.new
-board.board = [[" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" ","k"," "," "," "," "," "," "],
-                [" ","q"," "," "," "," "," ","P"],
-                [" "," "," "," "," "," "," "," "],
-                ["K"," "," "," "," "," "," "," "]]
-chess = ChessGame.new
-player = Player.new("1", "white")
-
-p chess.stalemate?(player,board)
