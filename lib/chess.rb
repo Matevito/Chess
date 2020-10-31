@@ -5,21 +5,22 @@ require_relative "pieces/pawn"
 require_relative "pieces/queen"
 require_relative "pieces/tower"
 
-class Chess_game
-    def stalemate?(player)
+class ChessGame
+    def stalemate?(player,board)
         color = player.color
         possible_moves = []
         for y in (0..7) do
             for x in (0..7) do
                 if color == "white"
-                    possible_moves << piece_path = self.piece_path([y,x], "black")
+                    possible_moves << piece_path = self.piece_path([y,x], "white", board)
                 else 
-                    possible_moves << piece_path = self.piece_path([y,x], "white")
+                    possible_moves << piece_path = self.piece_path([y,x], "black" , board)
                 end
             end
         end
-        p "possible_moves"
-        if possible_moves == []
+        possible_moves = [possible_moves.flatten]
+        p "possible_moves #{possible_moves}"
+        if possible_moves == [[]]
             return true
         else
             return false
@@ -41,7 +42,7 @@ class Chess_game
         end
         return valid_moves
     end
-    def piece_path(position, color)
+    def piece_path(position, color, board)
         current_board = board.board
         cell_content = current_board[position[0]][position[1]]
         
@@ -92,7 +93,15 @@ class Chess_game
         end
     end
 end
-
 board = Board.new
-p "i happen"
-p board.board
+chess = ChessGame.new
+white_player = Player.new("1", "white")
+board.board = [ [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                ["K"," "," "," "," "," "," "," "]]
+p chess.stalemate?(white_player, board)
