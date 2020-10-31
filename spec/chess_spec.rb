@@ -55,4 +55,28 @@ describe ChessGame do
             expect(chess.stalemate?(white_player, board)).to eql(false)
         end
     end
+    describe "#checkmate?"do
+        board = Board.new
+        chess = ChessGame.new
+        white_player = Player.new("1","white")
+        black_player = Player.new("2", "black")
+        it "checkmate against white" do
+            # CHECKMATE? IS NOT COUNTING POSSIBLE KING MOVES(problem is in stalemate)
+            board.board = [ [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" ","k"," "," "," "," "," "," "],
+                            ["q"," "," "," "," "," "," "," "],
+                            ["K"," "," "," "," "," "," "," "]]
+            expect(chess.checkmate?(white_player,board)).to eql(true)
+        end
+        xit "checkmate againts black" do
+            
+        end
+        xit "no checkmate postition" do
+            
+        end
+    end
 end

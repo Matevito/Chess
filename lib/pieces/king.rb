@@ -28,8 +28,9 @@ class King < Board
         possible_moves.each do |cell|
             row = cell[0]; column = cell[1]
             next unless move_in_board?(cell)
-            next unless current_board[row][column] == " "
-            
+            #whats the point of this? what if ist not blank? (case when the space is ocupied by and enemy piece)
+            #paused for the moment: next unless current_board[row][column] == " "
+            c_cell = current_board[row][column]
             # make a copy of the board with the king in the new possible cell
             test_board = Board.new
             board_copy = current_board.dup.map(&:dup)

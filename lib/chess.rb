@@ -97,10 +97,23 @@ class ChessGame
         when "p"
             piece = Pawn.new
         end
-
+        
         path = piece.possible_moves(player, position, board)
+        p path
         path = correct_path(path)
         path = search_checks(path, position, player, board)
         return path
     end
 end
+board = Board.new
+chess = ChessGame.new
+white_player = Player.new("1","white")
+board.board = [ [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" ","k"," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                ["q"," "," "," "," "," "," "," "],
+                ["K"," "," "," "," "," "," "," "]]
+p chess.checkmate?(white_player, board)
