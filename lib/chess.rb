@@ -7,6 +7,9 @@ require_relative "pieces/tower"
 
 class ChessGame
     include GameMethods
+    def checkmate?(player, board)
+
+    end
     def stalemate?(player,board)
         color = player.color
         possible_moves = []
@@ -93,37 +96,5 @@ class ChessGame
         path = correct_path(path)
         path = search_checks(path, position, player, board)
         return path
-        
     end
 end
-puts "\nTests 1."
-board = Board.new
-chess = ChessGame.new
-white_player = Player.new("1", "white")
-black_player = Player.new("0", "black")
-board.board = [ [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," ","T"," "," "," "],
-                [" "," "," "," "," "," ","Q"," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," ","k","b","Q"]]
-p chess.stalemate?(black_player, board)
-
-puts "\nTests 2."
-board.board = [ [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," ","T"," "," "," "],
-                [" "," "," "," "," ","q","Q"," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," ","k"," ","Q"]]
-p chess.stalemate?(black_player, board)
-
-puts "\nTests 3."
-board = Board.new
-
-p chess.stalemate?(white_player,board)
-
