@@ -25,19 +25,36 @@ class Board
         color = player.color
         possible_moves = []
         for y in (0..7) do
-            for x (0..7) do
+            for x in (0..7) do
                 if color == "white"
-                    piece_path = self.piece_path([y,x], "black")
+                    possible_moves << piece_path = self.piece_path([y,x], "black")
                 else 
-                    piece_path = self.piece_path([y,x], "white")
+                    possible_moves << piece_path = self.piece_path([y,x], "white")
                 end
             end
         end
+        p "possible_moves"
         if possible_moves == []
             return true
         else
             return false
         end
+    end
+    def search_checks(path, current_piece, player)
+        valid_moves = []
+        piece_row = current_piece[0]
+        piece_column = current_piece[1]
+        king = King.new
+        path.each do |cell|
+            row = cell[0]; column = cell[1]
+            test_board = Board.new
+            test_board.board = @board.dup.map(&:dup)
+            board_copy = test_board.board
+            board_copy[row][column] = board_copy[piece_row][piece_column]
+            board_copy[piece_row][piece_column] = " "
+            valid_moves << cell unless king.check?(player, test_board)
+        end
+        return valid_moves
     end
     def piece_path(position, color)
         current_board = board.board
@@ -90,3 +107,7 @@ class Board
         end
     end
 end
+
+board = Board.new
+
+p board.stalemate?
