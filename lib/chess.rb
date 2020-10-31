@@ -20,7 +20,6 @@ class ChessGame
             end
         end
         possible_moves = [possible_moves.flatten]
-        p "possible_moves #{possible_moves}"
         if possible_moves == [[]]
             return true
         else
@@ -91,10 +90,8 @@ class ChessGame
         end
 
         path = piece.possible_moves(player, position, board)
-        p "#{path}"
         path = correct_path(path)
         path = search_checks(path, position, player, board)
-        p "corrected-path #{path}"
         return path
         
     end
@@ -124,3 +121,9 @@ board.board = [ [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," ","k"," ","Q"]]
 p chess.stalemate?(black_player, board)
+
+puts "\nTests 3."
+board = Board.new
+
+p chess.stalemate?(white_player,board)
+
