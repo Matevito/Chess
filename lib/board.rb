@@ -15,4 +15,10 @@ class Board
         return false if position[0] > 7 || position[1] > 7
         return true
     end
+    def print_board
+
+    end
+    def put_unicode(c_board)
+
+    end
 end
