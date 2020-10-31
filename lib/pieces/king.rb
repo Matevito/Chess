@@ -31,6 +31,11 @@ class King < Board
             #whats the point of this? what if ist not blank? (case when the space is ocupied by and enemy piece)
             #paused for the moment: next unless current_board[row][column] == " "
             c_cell = current_board[row][column]
+            if color == "white"
+                next if c_cell == c_cell.upcase && c_cell != " "
+            elsif color == "black"
+                next if c_cell == c_cell.downcase && c_cell != " "
+            end
             # make a copy of the board with the king in the new possible cell
             test_board = Board.new
             board_copy = current_board.dup.map(&:dup)

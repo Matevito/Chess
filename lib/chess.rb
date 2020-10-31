@@ -99,7 +99,6 @@ class ChessGame
         end
         
         path = piece.possible_moves(player, position, board)
-        p path
         path = correct_path(path)
         path = search_checks(path, position, player, board)
         return path
