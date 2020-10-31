@@ -104,15 +104,3 @@ class ChessGame
         return path
     end
 end
-board = Board.new
-chess = ChessGame.new
-white_player = Player.new("1","white")
-board.board = [ [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" ","k"," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                ["q"," "," "," "," "," "," "," "],
-                ["K"," "," "," "," "," "," "," "]]
-p chess.checkmate?(white_player, board)

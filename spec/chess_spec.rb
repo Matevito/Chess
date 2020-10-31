@@ -72,11 +72,39 @@ describe ChessGame do
                             ["K"," "," "," "," "," "," "," "]]
             expect(chess.checkmate?(white_player,board)).to eql(true)
         end
-        xit "checkmate againts black" do
-            
+        it "checkmate againts black" do
+            board.board = [ ["T"," ","k"," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," ","K"," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "]]
+            expect(chess.checkmate?(black_player,board)).to eql(true)
         end
-        xit "no checkmate postition" do
-            
+        it "block path to prevent checkmate" do
+            board.board = [ ["T"," ","k"," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," ","K"," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" ","q"," "," "," "," "," "," "]]
+            expect(chess.checkmate?(black_player,board)).to eql(false)
+        end
+        it "king can capture piece that makes a check" do
+            # CHECKMATE? IS NOT COUNTING POSSIBLE KING MOVES(problem is in stalemate)
+            board.board = [ [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" ","k"," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            ["q"," "," "," "," "," "," "," "],
+                            ["K"," "," "," "," "," "," "," "]]
+            expect(chess.checkmate?(white_player,board)).to eql(false)
         end
     end
 end
