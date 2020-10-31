@@ -26,6 +26,7 @@ module GameMethods
     end
     def correct_path(path)
         new_path = []
+        path = path.flatten
         (path.size/2).times do
             new_path << [path[0], path[1]]
             path.shift(2)

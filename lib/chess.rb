@@ -93,8 +93,23 @@ class ChessGame
         end
 
         path = piece.possible_moves(player, position, board)
+        p "path #{path}"
         path = correct_path(path)
+        p "path #{path}"
         path = search_checks(path, position, player, board)
         return path
     end
 end
+board = Board.new
+board.board = [[" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" ","k"," "," "," "," "," "," "],
+                [" ","q"," "," "," "," "," ","P"],
+                [" "," "," "," "," "," "," "," "],
+                ["K"," "," "," "," "," "," "," "]]
+chess = ChessGame.new
+player = Player.new("1", "white")
+
+p chess.stalemate?(player,board)

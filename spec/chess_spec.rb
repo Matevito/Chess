@@ -41,7 +41,18 @@ describe ChessGame do
         end
         it "there's no stalemate in beggining position" do
             board = Board.new
-            expect(chess.stalemate?(white_player, board)).to eql(false)                
+            expect(chess.stalemate?(white_player, board)).to eql(false)
+        end
+        it "another piece, besides the king, can be moved" do
+            board.board = [ [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" "," "," "," "," "," "," "," "],
+                            [" ","k"," "," "," "," "," "," "],
+                            [" ","q"," "," "," "," "," "," "],
+                            [" "," "," "," ","P"," "," "," "],
+                            ["K"," "," "," "," "," "," "," "]]
+            expect(chess.stalemate?(white_player, board)).to eql(false)
         end
     end
 end
