@@ -6,6 +6,7 @@ require_relative "pieces/queen"
 require_relative "pieces/tower"
 
 class ChessGame
+    include GameMethods
     def stalemate?(player,board)
         color = player.color
         possible_moves = []
@@ -26,17 +27,20 @@ class ChessGame
             return false
         end
     end
-    def search_checks(path, current_piece, player)
+    def search_checks(path, current_piece, player, board)
         valid_moves = []
         piece_row = current_piece[0]
         piece_column = current_piece[1]
         king = King.new
+        path = path.flatten
+        path = correct_path(path)
+
         path.each do |cell|
             row = cell[0]; column = cell[1]
             test_board = Board.new
-            test_board.board = @board.dup.map(&:dup)
+            test_board.board = board.board.dup.map(&:dup)
             board_copy = test_board.board
-            board_copy[row][column] = board_copy[piece_row][piece_column]
+            board_copy[row][column] = board.board[piece_row][piece_column]
             board_copy[piece_row][piece_column] = " "
             valid_moves << cell unless king.check?(player, test_board)
         end
@@ -86,22 +90,37 @@ class ChessGame
             piece = Pawn.new
         end
 
-        if cell_content == "P" || cell_content == "p"
-            return piece.capture_range(player, position, board)
-        else
-            return piece.possible_moves(player, position, board)
-        end
+        path = piece.possible_moves(player, position, board)
+        p "#{path}"
+        path = correct_path(path)
+        path = search_checks(path, position, player, board)
+        p "corrected-path #{path}"
+        return path
+        
     end
 end
+puts "\nTests 1."
 board = Board.new
 chess = ChessGame.new
 white_player = Player.new("1", "white")
+black_player = Player.new("0", "black")
 board.board = [ [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
+                [" "," "," "," ","T"," "," "," "],
+                [" "," "," "," "," "," ","Q"," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," ","k","b","Q"]]
+p chess.stalemate?(black_player, board)
+
+puts "\nTests 2."
+board.board = [ [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
-                ["K"," "," "," "," "," "," "," "]]
-p chess.stalemate?(white_player, board)
+                [" "," "," "," ","T"," "," "," "],
+                [" "," "," "," "," ","q","Q"," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," ","k"," ","Q"]]
+p chess.stalemate?(black_player, board)
