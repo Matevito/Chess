@@ -1,3 +1,4 @@
+require "colorize"
 class Board
     attr_accessor :board
     def initialize
@@ -14,11 +15,6 @@ class Board
         return false if position[0] < 0 || position[1] < 0
         return false if position[0] > 7 || position[1] > 7
         return true
-    end
-    def print_board
-        board_to_print = @board.dup.map(&:dup)
-        board_to_print = put_unicode(board_to_print)
-        
     end
     def put_unicode(c_board)
         uni_board = []
@@ -58,8 +54,46 @@ class Board
             uni_board << row
         end
         return uni_board
+        end
+    def print_board
+        board_p = @board.dup.map(&:dup)
+        board_p = put_unicode(board_p)
+        board_p = colorize_board(board_p)
+        for x in (0..7) do
+            i = 7-x
+            puts "#{i+1} #{board_p[i][0]}#{board_p[i][1]}#{board_p[i][2]}#{board_p[i][3]}#{board_p[i][4]}#{board_p[i][5]}#{board_p[i][6]}#{board_p[i][7]}"
+        end
+        puts "  abcdefgh"
+    end
+    def colorize_board(board)
+        colorized_board = []
+        for i in (0..7) do
+            row = []
+            if i % 2 == 0
+                for x in (0..7)do
+                    cell_content = board[i][x]
+                    if x % 2 == 0
+                        cell_content = board[i][x]
+                        row << cell_content.colorize(:background => :light_black)
+                    else
+                        cell_content = board[i][x]
+                        row << cell_content.colorize(:background => :light_blue)
+                    end
+                end
+            else
+                for x in (0..7)do
+                    cell_content = board[i][x]
+                    if x % 2 == 0
+                        row << cell_content.colorize(:background => :light_blue)
+                    else
+                        row << cell_content.colorize(:background => :light_black)
+                    end
+                end
+            end
+            colorized_board << row
+        end
+        return colorized_board
     end
 end
-
 board = Board.new
 board.print_board
