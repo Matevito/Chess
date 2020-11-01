@@ -88,14 +88,6 @@ describe King do
         white_player = Player.new("1","white")
         black_player = Player.new("2", "black")
         it "no check in starting possition" do
-            board.board =[["T","N","B","Q"," ","B","N","T"],
-                        ["P","P","P","P","P","P","P","P"],
-                        [" "," "," "," "," "," "," "," "],
-                        [" "," "," "," "," "," "," "," "],
-                        [" "," "," "," "," "," "," "," "],
-                        [" "," "," "," "," "," "," "," "],
-                        ["p","p","p","p","p","p","p","p"],
-                        ["t","n","b","q","k","b","n","t"]]
             expect(king.check?(black_player,board)).to eql(false)
         end
         it "pawn protecting from a check" do
