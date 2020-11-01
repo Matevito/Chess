@@ -23,31 +23,31 @@ class Board
             cells.each do |c_cell|
                 case c_cell
                 when " "
-                    new_content = " "
+                    new_content = "   "
                 when "t"
-                    new_content = "\u2656"
+                    new_content = " \u2656 "
                 when "T"
-                    new_content = "\u265C"
+                    new_content = " \u265C "
                 when "n"
-                    new_content = "\u2658"
+                    new_content = " \u2658 "
                 when "N"
-                    new_content = "\u265E"
+                    new_content = " \u265E "
                 when "b"
-                    new_content = "\u2657"
+                    new_content = " \u2657 "
                 when "B"
-                    new_content = "\u265D"
+                    new_content = " \u265D "
                 when "q"
-                    new_content = "\u2655"
+                    new_content = " \u2655 "
                 when "Q"
-                    new_content = "\u265B"
+                    new_content = " \u265B "
                 when "k"
-                    new_content = "\u2654"
+                    new_content = " \u2654 "
                 when "K"
-                    new_content = "\u265A"
+                    new_content = " \u265A "
                 when "p"
-                    new_content = "\u2659"
+                    new_content = " \u2659 "
                 when "P"
-                    new_content = "\u265F"
+                    new_content = " \u265F "
                 end
                 row << new_content
             end
@@ -63,7 +63,7 @@ class Board
             i = 7-x
             puts "#{i+1} #{board_p[i][0]}#{board_p[i][1]}#{board_p[i][2]}#{board_p[i][3]}#{board_p[i][4]}#{board_p[i][5]}#{board_p[i][6]}#{board_p[i][7]}"
         end
-        puts "  abcdefgh"
+        puts "   a  b  c  d  e  f  g  h"
     end
     def colorize_board(board)
         colorized_board = []
