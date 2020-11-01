@@ -4,8 +4,19 @@ class Player
         @name = name
         @color = color
     end
-    def make_move()
-        current_move = gets.chomp
+    def get_input
+        puts "\n#{name}, this are the game options:
+    *Make a move in the game format (ex.e2-e3).
+    *['save']: save the current game.
+    *['quit']: this needs explication?"
+        input = gets.chomp
+        if input == "save" || input == "quit"
+            return input
+        else
+            return make_move(input)
+        end
+    end
+    def make_move(current_move)
         # castle exception
         if current_move == "o-o" || current_move == "o-o-o"
             return current_move
