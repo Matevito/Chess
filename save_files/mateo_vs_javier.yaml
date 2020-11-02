@@ -1,0 +1,89 @@
+--- !ruby/object:ChessGame
+historial:
+- - P
+  - e2
+  - e4
+- - p
+  - e7
+  - e5
+- - P
+  - f2
+  - f4
+- - p
+  - e5
+  - f4
+- - N
+  - g1
+  - f3
+white_player: !ruby/object:Player
+  name: mateo
+  color: white
+black_player: !ruby/object:Player
+  name: javier
+  color: black
+board: !ruby/object:Board
+  board:
+  - - T
+    - N
+    - B
+    - Q
+    - K
+    - B
+    - " "
+    - T
+  - - P
+    - P
+    - P
+    - P
+    - " "
+    - " "
+    - P
+    - P
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - N
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - P
+    - p
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - p
+    - p
+    - p
+    - p
+    - " "
+    - p
+    - p
+    - p
+  - - t
+    - n
+    - b
+    - q
+    - k
+    - b
+    - n
+    - t
