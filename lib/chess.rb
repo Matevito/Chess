@@ -43,7 +43,10 @@ class ChessGame
             move = player.get_input
             # options of quit and save game
             break if move == "quit"
-
+            if move == "save"
+                save_game(self)
+                break
+            end
             # check validity of the moves
             if self.en_passant?(player,move, @board, @historial)
                 @board.en_passant(move, player)
