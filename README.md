@@ -9,12 +9,14 @@ As a summary, the format can be resumed in the following way: "[current_cell][-]
 Examples: 
 
 Ka1-a2 (King from a1 to a2).
+
 b3-b4 (pawn b3 to b4).
+
 o-o-o (queen side castle).
 
 How to play?
 ----
-Run from the terminal the main.rb file.
+Run from the terminal the main.rb file. THen just follow the instructions that show the terminal and try not to perform illegal moves in the game.
 
 Game features
 ----
