@@ -17,6 +17,3 @@ class Game
         puts "\nThanks for playing!"
     end
 end
-
-chess = Game.new
-chess.user_interface
