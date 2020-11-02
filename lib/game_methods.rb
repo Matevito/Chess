@@ -33,4 +33,15 @@ module GameMethods
         end
         return new_path
     end
+    def piece_moved?(piece_position, historial)
+        historial.each do |position|
+            next if position == "o-o"
+            next if position == "o-o-o"
+            start = chess_to_num(position[1])
+            destination = chess_to_num(position[2])
+            return true if start == piece_position
+            return true if destination == piece_position
+        end
+        return false
+    end
 end
