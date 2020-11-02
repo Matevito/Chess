@@ -94,4 +94,13 @@ class Board
         end
         return colorized_board
     end
+    def make_move(move)
+
+    end
+    def en_passant(move)
+
+    end
+    def casstle(move)
+
+    end
 end

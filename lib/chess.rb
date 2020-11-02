@@ -113,10 +113,10 @@ class ChessGame
         return true if piece_path.include?(destination)
         return false
     end
-end
-chess = ChessGame.new
-player = Player.new("1", "white")
-move = ["P", "a2", "a4"]
-board_ = Board.new
+    def castle?(player, move, board, historial)
 
-p chess.valid_move?(player, move, board_)
+    end
+    def en_passant?(player, move, board, historial)
+
+    end
+end
