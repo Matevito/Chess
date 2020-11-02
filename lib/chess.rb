@@ -51,6 +51,9 @@ class ChessGame
                 @board.casstle(move, player)
             elsif valid_move?(player, move, @board)
                 @board.make_move(move, player)
+                if @board.can_promote?(player)
+                    @board.promote(player)
+                end
             else
                 next
             end
