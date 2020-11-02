@@ -114,31 +114,35 @@ class ChessGame
     def castle?(player, move, board, historial)
         return false unless move == "o-o" || move == "o-o-o"
         color = player.color
+        king = King.new
+        king.check?(player,board)
         if color == "white"
             king = [0,4]
-            # king in check?
             return false if piece_moved?(king, historial)
             if move == "o-o"
                 tower = [0,7]
                 return false if piece_moved?(tower, historial)
+                return false if clean_row?(king, tower, board)
                 
             elsif move == "o-o-o"
                 tower = [0,0]
                 return false if piece_moved?(tower, historial)
+                return false if clean_row?(king, tower, board)
 
             end
         elsif color == "black"
             king = [7,4]
-            # king in check?
             return false if piece_moved?(king, historial)
             if move == "o-o"
-                tower = [7,0]
-                return false if piece_moved?(tower, historial)
-
-            elsif move == "o-o-o"
                 tower = [7,7]
                 return false if piece_moved?(tower, historial)
-                
+                return false if clean_row?(king, tower, board)
+
+            elsif move == "o-o-o"
+                tower = [7,0]
+                return false if piece_moved?(tower, historial)
+                return false if clean_row?(king, tower, board)
+
             end
         end
         return false

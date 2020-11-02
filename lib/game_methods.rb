@@ -44,4 +44,17 @@ module GameMethods
         end
         return false
     end
+    def clean_row?(start, ending, board)
+        current_board = board.board
+        row = start[0]
+        tower = ending[1]
+        if ending[1] == 0
+            path = [1,2,3]
+            path.each{|column| return false if current_board[row][column] == " "}
+        elsif ending[1] == 7
+            path = [5,6]
+            path.each{|column| return false unless current_board[row][column] == " "}
+        end
+        return true
+    end
 end
