@@ -29,4 +29,6 @@ Game features
 Things yet to do
 ----
 1. A method that print in the terminal all the moves performed in the game
-2. declare stalemate in repetitions of cases.
+2. Declare stalemate in repetitions of cases.
+3. Add images to the readme.
+4. Go deeper in the readme. This means, explain better how to play and how to perform the diferent game options like load and save game. 
