@@ -196,6 +196,26 @@ class ChessGame
         end
         return false
     end
+    def castle_king_checks?(king_position, tower_position, player, board)
+        king = King.new
+        color = player.color
+        row = king_position[0]
+        if tower_position[1] == 0
+            path = [1,2,3]
+        else
+            path = [5,6]
+        end
+        path.each do |column|
+            test_board = Board.new
+            board_copy = board.board.dup.map(&:dup)
+            test_board.board = board_copy
+            board_copy = test_board.board
+            board_copy[row][column] = board_copy[row][king_position[1]]
+            board_copy[row][king_position[1]] = " "
+            return false if King.check?(player, test_board)
+        end
+        return true
+    end
 end
 chess = ChessGame.new
 player = Player.new("1", "black")
