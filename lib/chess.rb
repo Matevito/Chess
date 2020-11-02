@@ -122,12 +122,12 @@ class ChessGame
             if move == "o-o"
                 tower = [0,7]
                 return false if piece_moved?(tower, historial)
-                return false if clean_row?(king, tower, board)
+                return false unless clean_row?(king, tower, board)
                 return false if castle_king_checks?(king, tower, player, board)
             elsif move == "o-o-o"
                 tower = [0,0]
                 return false if piece_moved?(tower, historial)
-                return false if clean_row?(king, tower, board)
+                return false unless clean_row?(king, tower, board)
                 return false if castle_king_checks?(king, tower, player, board)
             end
         elsif color == "black"
@@ -136,12 +136,12 @@ class ChessGame
             if move == "o-o"
                 tower = [7,7]
                 return false if piece_moved?(tower, historial)
-                return false if clean_row?(king, tower, board)
+                return false unless clean_row?(king, tower, board)
                 return false if castle_king_checks?(king, tower, player, board)
             elsif move == "o-o-o"
                 tower = [7,0]
                 return false if piece_moved?(tower, historial)
-                return false if clean_row?(king, tower, board)
+                return false unless clean_row?(king, tower, board)
                 return false if castle_king_checks?(king, tower, player, board)
             end
         end
@@ -149,7 +149,9 @@ class ChessGame
         test_board = Board.new
         board_copy = board.board.dup.map(&:dup)
         test_board.board = board_copy
-        test_board.casttle(move, player)
+        test_board.casstle(move, player)
+        king = King.new
+
         return false if king.check?(player, test_board)
 
         return true
@@ -219,54 +221,26 @@ class ChessGame
             board_copy = test_board.board
             board_copy[row][column] = board_copy[row][king_position[1]]
             board_copy[row][king_position[1]] = " "
-            return false if King.check?(player, test_board)
+            return true if king.check?(player, test_board)
         end
 
-        return true
+        return false
     end
 end
 chess = ChessGame.new
-player = Player.new("1", "black")
-move = ["p", "b4","a3"]
+player = Player.new("1", "white")
+move = "o-o"
 board = Board.new
-historial = ["the rest of the moves",["P", "a2", "a4"]]
+historial = [["K", "e4", "e5"],["K", "e5", "e4"]]
 p "1st tests"
-board.board = [[" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," ","k"," "," "," "],
-                ["P","p"," "," "," "," "," "," "],
+board.board = [["T"," "," "," ","K"," "," ","T"],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
-                [" "," "," "," ","K"," "," "," "]]
-p chess.en_passant?(player, move, board, historial)
-board.en_passant(move, player)
-
-p "2nd tests"
-white_player = Player.new("2", "white")
-board.board = [  [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," ","k"," "," "," "],
-                ["P"," "," "," "," "," "," "," "],
-                [" ","p","P"," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
-                [" "," "," "," ","K"," "," "," "]]
-historial = ["the rest of the moves",["p", "b7", "b5"]]
-move = ["P", "c5","b6"]
-p chess.en_passant?(white_player, move, board, historial)
-board.en_passant(move, white_player)
-
-p "3rd test"
-board.board = [  [" "," "," "," "," "," "," "," "],
-                [" "," "," ","B"," "," "," "," "],
-                [" "," "," ","K"," "," "," "," "],
-                ["P","p"," "," "," "," "," "," "],
-                ["k"," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "]]
-historial = ["the rest of the moves",["P", "a2", "a4"]]
-move = ["p", "b4","a3"]
+                ["t"," "," "," ","k"," "," ","t"]]
+p chess.castle?(player, move, board, historial)
+board.casstle(move, player)
 board.print_board
-p chess.en_passant?(player, move, board, historial)
