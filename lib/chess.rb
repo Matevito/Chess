@@ -108,8 +108,6 @@ class ChessGame
         destination = chess_to_num(move[2])
         color = player.color
         piece_path = self.piece_path(start, color, board)
-        p "start:#{start}, destination #{destination}"
-        p "piece_path#{piece_path}"
         return true if piece_path.include?(destination)
         return false
     end
@@ -117,6 +115,43 @@ class ChessGame
 
     end
     def en_passant?(player, move, board, historial)
+        color = player.color
+        start = chess_to_num(move[1])
+        destination = chess_to_num(move[2])
+        column = destination[1]
+        last_move = historial.last
+        # color piece a pawn in the right spot
 
+        # the enemy pawn jas just moved 2 squares in a valid spot
+        if color = "white" && last_move[0] == "p" && move[0] == "P"
+            last_start = chess_to_num(last_move[1])
+            last_destination = chess_to_num(last_move[2])
+            if last_start[1] == column && last_destination[1] == column
+                return true if last_start[0] - 2 == last_destination[0]
+            end
+        elsif color = "black" && last_move[0] == "P" && move[0] == "p"
+            last_start = chess_to_num(last_move[1])
+            last_destination = chess_to_num(last_move[2])
+            if last_start[1] == column && last_destination[1] == column
+                return true if last_start[0] + 2 == last_destination[0]
+            end
+        end
+        return false
     end
 end
+chess = ChessGame.new
+player = Player.new("1", "black")
+move = ["p", "b4","a3"]
+board = Board.new
+historial = ["the rest of the moves",["P", "a2", "a4"]]
+p "1st tests"
+board.board = [  [" "," "," "," "," "," "," "," "],
+[" "," "," "," "," "," "," "," "],
+[" "," "," "," ","k"," "," "," "],
+[" "," "," "," "," "," "," "," "],
+["P","p"," "," "," "," "," "," "],
+[" "," "," "," "," "," "," "," "],
+[" "," "," "," "," "," "," "," "],
+[" "," "," "," ","K"," "," "," "]]
+
+p chess.en_passant?(player, move, board, historial)
