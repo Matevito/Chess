@@ -227,19 +227,3 @@ class ChessGame
         return false
     end
 end
-chess = ChessGame.new
-player = Player.new("1", "black")
-move = "o-o"
-board = Board.new
-historial = [["K", "e1", "e2"],["K", "e2", "e1"]]
-p "1st tests"
-board.board = [["T"," "," "," ","K"," "," ","T"],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," ","B"," "],
-                [" "," "," "," "," "," "," "," "],
-                ["t"," "," "," ","k"," "," ","t"]]
-board.print_board
-p chess.castle?(player, move, board, historial)
