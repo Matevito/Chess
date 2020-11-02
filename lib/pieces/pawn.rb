@@ -59,9 +59,6 @@ class Pawn < Board
         end
         return possible_captures
     end
-    def en_passant()
-    
-    end
     def can_promote?(player, position)
         color = player.color
         if color == "white"
@@ -70,8 +67,5 @@ class Pawn < Board
             return true if position[0] == 0
         end
         return false
-    end
-    def promote
-
     end
 end

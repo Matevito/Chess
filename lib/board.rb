@@ -156,4 +156,37 @@ class Board
             end
         end
     end
+    def can_promote?(player)
+        color = player.color
+        if color == "white"
+            row = @board[7]
+            row.each {|cell| return true if cell == "P"}
+        else
+            row =@board[0]
+            row.each {|cell| return true if cell == "p"}
+        end
+        return false
+    end
+    def promote(player)
+        color = player.color
+        puts "The pawn is promoted to?(n,b,q,t?)"
+        new_piece = gets.chomp
+        if color == "white"
+            new_piece = new_piece.upcase
+            row = @board[7]
+            row.each_with_index do |val, index|
+                if val == "P"
+                    @board[7][index] = new_piece
+                end
+            end
+        else
+            new_piece = new_piece.downcase
+            row = @board[0]
+            row.each_with_index do |val, index|
+                if val == "p"
+                    @board[0][index] = new_piece
+                end
+            end
+        end
+    end
 end
