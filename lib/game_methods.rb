@@ -59,8 +59,15 @@ module GameMethods
         return true
     end
     def load_game()
-        
-        game_file = File.new("#{save_name}.yaml", 'r')
+        files = Dir.entries("save_files/")
+        files.delete(".")
+        files.delete("..")
+        puts "\nsave files:"
+        files.each_with_index{|file, index| puts "#{index+1}: #{file}"}
+        puts "\nchoose a save file (ex.3,4,etc.)"
+        save_name = gets.chomp.to_i
+        save_name = files[save_name-1]
+        game_file = File.new("save_files/#{save_name}", 'r')
         saved_file = game_file.read
         YAML::load(saved_file)
     end
