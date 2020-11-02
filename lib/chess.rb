@@ -7,17 +7,48 @@ require_relative "pieces/tower"
 
 class ChessGame
     include GameMethods
-    attr_accessor :historial
+    attr_accessor :historial, :white_player, :black_player, :board
     def initialize
         @historial = []
+        @white_player = self.get_name("white")
+        @black_player = self.get_name("black")
+        @board = Board.new
     end
     def play_game
-        white_player = self.get_name("white")
-        black_player = self.get_name("black")
-        board = Board.new
-        puts ""
-        board.print_board
-        move = white_player.get_input 
+        loop do
+            if @historial.length % 2 == 0
+                player = @white_player
+                rival = @black_player
+            else
+                player = @black_player
+                rival = @white_player
+            end 
+            puts ""
+            board.print_board
+            # check checkmate and stalemate?
+            if self.checkmate?(player, @board)
+                puts "checkmate!"
+                puts "Winner is #{rival.name}."
+                break
+            elsif self.stalemate?
+                puts "stalemate."
+                break
+            end
+            # get input from the user
+            move = player.get_input
+            # todo: options of quit and save game
+            if self.en_passant?(player,move, @board, @historial)
+                @board.en_passant(move, player)
+            elsif self.castle?(player, move, @board, @historial)
+                @board.casstle(move, player)
+            elsif valid_move?(player, move, @board)
+                @board.make_move(move, player)
+            else
+                next
+            end
+            @historial << move
+            p @historial.length
+        end
     end
     def get_name(color)
         puts "\nput #{color} player name: "
