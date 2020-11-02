@@ -156,6 +156,9 @@ class ChessGame
         end
         
         path = piece.possible_moves(player, position, board)
+        if cell_content == "p" || cell_content == "P"
+            path.concat(piece.capture_range(player, position, board))
+        end
         path = correct_path(path)
         path = search_checks(path, position, player, board)
         return path
