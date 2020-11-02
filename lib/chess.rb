@@ -123,12 +123,12 @@ class ChessGame
                 tower = [0,7]
                 return false if piece_moved?(tower, historial)
                 return false if clean_row?(king, tower, board)
-                
+                return false if castle_king_checks?(king, tower, player, board)
             elsif move == "o-o-o"
                 tower = [0,0]
                 return false if piece_moved?(tower, historial)
                 return false if clean_row?(king, tower, board)
-
+                return false if castle_king_checks?(king, tower, player, board)
             end
         elsif color == "black"
             king = [7,4]
@@ -137,15 +137,22 @@ class ChessGame
                 tower = [7,7]
                 return false if piece_moved?(tower, historial)
                 return false if clean_row?(king, tower, board)
-
+                return false if castle_king_checks?(king, tower, player, board)
             elsif move == "o-o-o"
                 tower = [7,0]
                 return false if piece_moved?(tower, historial)
                 return false if clean_row?(king, tower, board)
-
+                return false if castle_king_checks?(king, tower, player, board)
             end
         end
-        return false
+        # castling does not produce a checK!
+        test_board = Board.new
+        board_copy = board.board.dup.map(&:dup)
+        test_board.board = board_copy
+        test_board.casttle(move, player)
+        return false if king.check?(player, test_board)
+
+        return true
     end
     def en_passant?(player, move, board, historial)
         color = player.color
@@ -214,6 +221,7 @@ class ChessGame
             board_copy[row][king_position[1]] = " "
             return false if King.check?(player, test_board)
         end
+
         return true
     end
 end
