@@ -103,4 +103,11 @@ class ChessGame
         path = search_checks(path, position, player, board)
         return path
     end
+    def valid_move?(player, move, board)
+        start = chess_to_num(move[1])
+        destination = chess_to_num(move[2])
+        color = player.color
+        piece_path = self.piece_path(start, color, board)
+        return true if piece_path.include?(destination)
+    end
 end
