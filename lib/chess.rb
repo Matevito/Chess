@@ -108,7 +108,15 @@ class ChessGame
         destination = chess_to_num(move[2])
         color = player.color
         piece_path = self.piece_path(start, color, board)
+        p "start:#{start}, destination #{destination}"
+        p "piece_path#{piece_path}"
         return true if piece_path.include?(destination)
         return false
     end
 end
+chess = ChessGame.new
+player = Player.new("1", "white")
+move = ["P", "a2", "a4"]
+board_ = Board.new
+
+p chess.valid_move?(player, move, board_)
