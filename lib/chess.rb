@@ -28,15 +28,23 @@ class ChessGame
             # check checkmate and stalemate?
             if self.checkmate?(player, @board)
                 puts "checkmate!"
-                puts "Winner is #{rival.name}."
+                puts "#{rival.name} wins."
                 break
-            elsif self.stalemate?
+            elsif self.stalemate?(player, @board)
                 puts "stalemate."
                 break
             end
+            # message if there's a check!
+            king = King.new
+            if king.check?(player, board)
+                puts "check!"
+            end
             # get input from the user
             move = player.get_input
-            # todo: options of quit and save game
+            # options of quit and save game
+            break if move == "quit"
+
+            # check validity of the moves
             if self.en_passant?(player,move, @board, @historial)
                 @board.en_passant(move, player)
             elsif self.castle?(player, move, @board, @historial)
