@@ -96,8 +96,13 @@ class Board
         end
         return colorized_board
     end
-    def make_move(move)
-
+    def make_move(move, player)
+        color = player.color
+        start = chess_to_num(move[1])
+        destination = chess_to_num(move[2])
+        current_piece = move[0]
+        @board[destination[0]][destination[1]] = current_piece
+        @board[start[0]][start[1]] = " "
     end
     def en_passant(move, player)
         color = player.color
