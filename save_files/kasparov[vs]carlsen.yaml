@@ -1,0 +1,86 @@
+--- !ruby/object:ChessGame
+historial:
+- - P
+  - d2
+  - d4
+- - p
+  - d7
+  - d5
+- - P
+  - c2
+  - c4
+- - p
+  - c7
+  - c6
+white_player: !ruby/object:Player
+  name: kasparov
+  color: white
+black_player: !ruby/object:Player
+  name: carlsen
+  color: black
+board: !ruby/object:Board
+  board:
+  - - T
+    - N
+    - B
+    - Q
+    - K
+    - B
+    - N
+    - T
+  - - P
+    - P
+    - " "
+    - " "
+    - P
+    - P
+    - P
+    - P
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - P
+    - P
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - p
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - p
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - p
+    - p
+    - " "
+    - " "
+    - p
+    - p
+    - p
+    - p
+  - - t
+    - n
+    - b
+    - q
+    - k
+    - b
+    - n
+    - t
