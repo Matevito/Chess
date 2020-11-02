@@ -7,6 +7,24 @@ require_relative "pieces/tower"
 
 class ChessGame
     include GameMethods
+    attr_accessor :historial
+    def initialize
+        @historial = []
+    end
+    def play_game
+        white_player = self.get_name("white")
+        black_player = self.get_name("black")
+        board = Board.new
+        puts ""
+        board.print_board
+        move = white_player.get_input 
+    end
+    def get_name(color)
+        puts "\nput #{color} player name: "
+        name = gets.chomp
+        player = Player.new(name, color)
+        return player
+    end
     def checkmate?(player, board)
         king = King.new
         if king.check?(player,board)
