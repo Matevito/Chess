@@ -115,7 +115,7 @@ class ChessGame
         return false unless move == "o-o" || move == "o-o-o"
         color = player.color
         king = King.new
-        king.check?(player,board)
+        return false if king.check?(player,board)
         if color == "white"
             king = [0,4]
             return false if piece_moved?(king, historial)
@@ -228,19 +228,18 @@ class ChessGame
     end
 end
 chess = ChessGame.new
-player = Player.new("1", "white")
+player = Player.new("1", "black")
 move = "o-o"
 board = Board.new
-historial = [["K", "e4", "e5"],["K", "e5", "e4"]]
+historial = [["K", "e1", "e2"],["K", "e2", "e1"]]
 p "1st tests"
 board.board = [["T"," "," "," ","K"," "," ","T"],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
-                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," ","B"," "],
                 [" "," "," "," "," "," "," "," "],
                 ["t"," "," "," ","k"," "," ","t"]]
-p chess.castle?(player, move, board, historial)
-board.casstle(move, player)
 board.print_board
+p chess.castle?(player, move, board, historial)
