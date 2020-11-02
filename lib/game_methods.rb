@@ -1,3 +1,4 @@
+require 'yaml'
 module GameMethods
     def chess_to_num(cell)
         # cell number format [row, column]
@@ -56,5 +57,17 @@ module GameMethods
             path.each{|column| return false unless current_board[row][column] == " "}
         end
         return true
+    end
+    def load_game()
+        
+        game_file = File.new("#{save_name}.yaml", 'r')
+        saved_file = game_file.read
+        YAML::load(saved_file)
+    end
+    def save_game(object)
+        save_file = YAML.dump(object)
+        save_name = "#{object.white_player.name}_vs_#{object.black_player.name}"
+        game_file = File.new("save_files/#{save_name}.yaml", 'w')
+        game_file.write(save_file)
     end
 end
