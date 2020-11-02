@@ -1,5 +1,5 @@
 # Chess game using ruby!
-
+Chess is a two-player board game played in a grid of 64 squares (8x8). This game is performed using ruby and runing directly from the terminal. If you wonna know more about the game check the chess page in wikipedia.
 
 Notation format
 ----
@@ -12,10 +12,19 @@ Ka1-a2 (King from a1 to a2).
 b3-b4 (pawn b3 to b4).
 o-o-o (queen side castle).
 
+How to play?
+----
+Run from the terminal the main.rb file.
+
 Game features
 ----
 1. Performs a game of chess in the terminal with two human player (localy).
 2. Save and load games that have been played in the program(does not read games in algebraic notation).
 3. Prevents players from making illegal moves.
-4. Declares check and checkmate.
+4. Declares check, checkmate and stalemate.
 5. The board printed in the terminal uses the uni-code chess symbols.
+
+Things yet to do
+----
+1. A method that print in the terminal all the moves performed in the game
+2. declare stalemate in repetitions of cases.
