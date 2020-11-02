@@ -120,16 +120,27 @@ class ChessGame
         destination = chess_to_num(move[2])
         column = destination[1]
         last_move = historial.last
+        current_board = board.board
         # color piece a pawn in the right spot
-
+        # a pawn is not moved
+        return false if move[0] != "p" && color == "black"
+        return false if move[0] != "P" && color == "white"
+        # the pawn is really in the board starting position!
+        return false if current_board[start[0]][start[1]] != move[0]
+        if color == "white"
+            return false if start[0] != 4
+        elsif color =="black"
+            return false if start[0] != 3
+        end
+        
         # the enemy pawn jas just moved 2 squares in a valid spot
-        if color = "white" && last_move[0] == "p" && move[0] == "P"
+        if color = "white" && last_move[0] == "p"
             last_start = chess_to_num(last_move[1])
             last_destination = chess_to_num(last_move[2])
             if last_start[1] == column && last_destination[1] == column
                 return true if last_start[0] - 2 == last_destination[0]
             end
-        elsif color = "black" && last_move[0] == "P" && move[0] == "p"
+        elsif color = "black" && last_move[0] == "P"
             last_start = chess_to_num(last_move[1])
             last_destination = chess_to_num(last_move[2])
             if last_start[1] == column && last_destination[1] == column
@@ -145,13 +156,27 @@ move = ["p", "b4","a3"]
 board = Board.new
 historial = ["the rest of the moves",["P", "a2", "a4"]]
 p "1st tests"
-board.board = [  [" "," "," "," "," "," "," "," "],
-[" "," "," "," "," "," "," "," "],
-[" "," "," "," ","k"," "," "," "],
-[" "," "," "," "," "," "," "," "],
-["P","p"," "," "," "," "," "," "],
-[" "," "," "," "," "," "," "," "],
-[" "," "," "," "," "," "," "," "],
-[" "," "," "," ","K"," "," "," "]]
-
+board.board = [[" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," ","k"," "," "," "],
+                ["P","p"," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," ","K"," "," "," "]]
 p chess.en_passant?(player, move, board, historial)
+
+p "2nd tests"
+white_player = Player.new("2", "white")
+board.board = [  [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," ","k"," "," "," "],
+                ["P"," "," "," "," "," "," "," "],
+                [" ","p","P"," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," "," "," "," "," "],
+                [" "," "," "," ","K"," "," "," "]]
+board.print_board
+historial = ["the rest of the moves",["p", "b7", "b5"]]
+move = ["P", "c5","b6"]
+p chess.en_passant?(white_player, move, board, historial)
