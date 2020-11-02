@@ -1,5 +1,7 @@
 require "colorize"
+require_relative "game_methods"
 class Board
+    include GameMethods
     attr_accessor :board
     def initialize
         @board = [  ["T","N","B","Q","K","B","N","T"],
@@ -97,8 +99,25 @@ class Board
     def make_move(move)
 
     end
-    def en_passant(move)
-
+    def en_passant(move, player)
+        color = player.color
+        start = chess_to_num(move[1])
+        destination = chess_to_num(move[2])
+        start_row = start[0]
+        start_column = start[1]
+        destination_row = destination[0]
+        destination_column = destination[1]
+        # put the pawn in the new space
+        @board[destination_row][destination_column] = @board[start_row][start_column]
+        # blank the last pawn cell
+        @board[start_row][start_column] = " "
+        # remove the captured enemy pawn
+        p color
+        if color == "white"
+            @board[destination_row-1][destination_column] = " "
+        else
+            @board[destination_row+1][destination_column] = " "
+        end
     end
     def casstle(move)
 
