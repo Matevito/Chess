@@ -112,7 +112,7 @@ class ChessGame
         return false
     end
     def castle?(player, move, board, historial)
-
+        return false unless move == "o-o" || move == "o-o-o"
     end
     def en_passant?(player, move, board, historial)
         color = player.color
@@ -138,13 +138,27 @@ class ChessGame
             last_start = chess_to_num(last_move[1])
             last_destination = chess_to_num(last_move[2])
             if last_start[1] == column && last_destination[1] == column
-                return true if last_start[0] - 2 == last_destination[0]
+                if last_start[0] - 2 == last_destination[0]
+                    test_board = Board.new
+                    board_copy = current_board.dup.map(&:dup)
+                    test_board.board = board_copy
+                    test_board.en_passant(move, player)
+                    king = King.new
+                    return true unless king.check?(player, test_board)
+                end
             end
         elsif color = "black" && last_move[0] == "P"
             last_start = chess_to_num(last_move[1])
             last_destination = chess_to_num(last_move[2])
             if last_start[1] == column && last_destination[1] == column
-                return true if last_start[0] + 2 == last_destination[0]
+                if last_start[0] + 2 == last_destination[0]
+                    test_board = Board.new
+                    board_copy = current_board.dup.map(&:dup)
+                    test_board.board = board_copy
+                    test_board.en_passant(move, player)
+                    king = King.new
+                    return true unless king.check?(player, test_board)
+                end
             end
         end
         return false
@@ -164,10 +178,8 @@ board.board = [[" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," ","K"," "," "," "]]
-board.print_board
 p chess.en_passant?(player, move, board, historial)
 board.en_passant(move, player)
-board.print_board
 
 p "2nd tests"
 white_player = Player.new("2", "white")
@@ -179,12 +191,10 @@ board.board = [  [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "],
                 [" "," "," "," ","K"," "," "," "]]
-board.print_board
 historial = ["the rest of the moves",["p", "b7", "b5"]]
 move = ["P", "c5","b6"]
 p chess.en_passant?(white_player, move, board, historial)
 board.en_passant(move, white_player)
-board.print_board
 
 p "3rd test"
 board.board = [  [" "," "," "," "," "," "," "," "],
@@ -197,5 +207,5 @@ board.board = [  [" "," "," "," "," "," "," "," "],
                 [" "," "," "," "," "," "," "," "]]
 historial = ["the rest of the moves",["P", "a2", "a4"]]
 move = ["p", "b4","a3"]
-p chess.en_passant?(player, move, board, historial)
 board.print_board
+p chess.en_passant?(player, move, board, historial)
