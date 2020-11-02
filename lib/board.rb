@@ -119,7 +119,36 @@ class Board
             @board[destination_row+1][destination_column] = " "
         end
     end
-    def casstle(move)
-
+    def casstle(move, player)
+        color = player.color
+        if color == "white"
+            # king side
+            if move == "o-o"
+                @board[0][6] = @board[0][4]
+                @board[0][4] = " "
+                @board[0][5] = @board[0][7]
+                @board[0][7] =  " "
+            # queen side
+            else
+                @board[0][2] = @board[0][4]
+                @board[0][4] = " "
+                @board[0][3] = @board[0][0]
+                @board[0][0] = " "
+            end
+        elsif color == "black"
+            # king side
+            if move == "o-o"
+                @board[7][6] = @board[7][4]
+                @board[7][4] = " "
+                @board[7][5] = @board[7][7]
+                @board[7][7] = " "
+            # queen side
+            else
+                @board[7][2] = @board[7][4]
+                @board[7][4] = " "
+                @board[7][3] = @board[7][0]
+                @board[7][0] = " "
+            end
+        end
     end
 end
