@@ -109,5 +109,6 @@ class ChessGame
         color = player.color
         piece_path = self.piece_path(start, color, board)
         return true if piece_path.include?(destination)
+        return false
     end
 end
